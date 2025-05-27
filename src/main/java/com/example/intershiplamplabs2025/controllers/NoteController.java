@@ -21,13 +21,15 @@ public class NoteController {
     @PostMapping("/note")
     public ResponseEntity<Note> createNote(@RequestBody NoteDTO noteDTO) {
         Note note = new Note(noteDTO.getTitle(), noteDTO.getContent());
+        System.out.println(noteDTO.getContent());
+        System.out.println("[a[a");
         Note savedNote = noteRepository.save(note);
         return ResponseEntity.ok(savedNote);
     }
 
     @GetMapping("/note/{id}")
-    public ResponseEntity<Note> getNoteById(@PathVariable Long id) {
-        Optional<Note> note = noteRepository.findById(id);
+    public ResponseEntity<Note> getNoteById(@PathVariable("id") String id) {
+        Optional<Note> note = noteRepository.findById(Long.valueOf(id));
         return note.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

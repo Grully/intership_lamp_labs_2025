@@ -16,16 +16,16 @@ import java.time.LocalDateTime;
 @Setter
 public class Note {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "title")
     private String title;
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(name = "content")
     private String content;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public Note(String title, String content) {
